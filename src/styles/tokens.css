@@ -1,0 +1,132 @@
+/* NOCTURNO Design Tokens & Editorial Styles */
+
+:root {
+  /* Color System */
+  --color-black: #050505;
+  --color-paper: #EDE9DF;
+  --color-white: #F6F3EA;
+  --color-red: #B50016;
+  --color-red-bright: #E0001B;
+  --color-red-dark: #68000E;
+  --color-red-deep: #3A0007;
+  --color-gray: #737373;
+  --color-gray-dark: #181818;
+  --color-gray-light: #A3A3A3;
+  --color-paper-muted: #D8D3C5;
+  --color-ink-border: #141414;
+
+  /* Typography Fluid Clamps */
+  --font-size-hero: clamp(3.2rem, 9.5vw, 11rem);
+  --font-size-awakening: clamp(3rem, 10vw, 12rem);
+  --font-size-section: clamp(1.8rem, 4.5vw, 4.5rem);
+  --font-size-subheading: clamp(1.1rem, 2vw, 1.8rem);
+  --font-size-body: clamp(0.85rem, 1.1vw, 1.05rem);
+  --font-size-mono: clamp(0.68rem, 0.85vw, 0.82rem);
+  --font-size-label: clamp(0.72rem, 0.95vw, 0.88rem);
+
+  /* Spacing & Safe Areas */
+  --gutter-outer: clamp(1.25rem, 3.5vw, 4rem);
+  --chrome-height: 4.5rem;
+  --scene-safe-top: clamp(6.5rem, 11vh, 9rem);
+
+  /* Z-Index Hierarchy System */
+  --z-base: 1;
+  --z-artwork: 10;
+  --z-editorial: 20;
+  --z-scene-meta: 30;
+  --z-chrome: 50;
+}
+
+/* Vertical Writing Modes for Manga Editorial */
+.writing-vertical-rl {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.writing-vertical-upright {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+
+/* =========================================================================
+   TACTILE MANGA PRINT & HALFTONE UTILITIES
+   ========================================================================= */
+
+/* Dark Halftone: Subtle dotted screentone over black/dark backgrounds */
+.halftone-dark {
+  background-image: radial-gradient(rgba(237, 233, 223, 0.12) 1px, transparent 1px);
+  background-size: 6px 6px;
+}
+
+/* Light Halftone: Traditional manga screentone over paper (#EDE9DF) */
+.halftone-light {
+  background-image: radial-gradient(rgba(5, 5, 5, 0.15) 1px, transparent 1px);
+  background-size: 5px 5px;
+}
+
+/* Dense Halftone: High-frequency shading screentone */
+.halftone-dense {
+  background-image: radial-gradient(rgba(5, 5, 5, 0.28) 1.2px, transparent 1.2px);
+  background-size: 4px 4px;
+}
+
+/* Aged Manga Paper: Subtle fiber speckles and tactile texture */
+.paper-texture-aged {
+  background-color: var(--color-paper);
+  background-image: 
+    radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 0),
+    radial-gradient(rgba(181, 0, 22, 0.02) 1px, transparent 0);
+  background-size: 16px 16px, 32px 32px;
+  background-position: 0 0, 8px 8px;
+}
+
+/* Subtle Ink Bleed & Scan Misregistration */
+.print-misregister {
+  text-shadow: 1px 0 0 rgba(181, 0, 22, 0.4), -0.5px 0 0 rgba(5, 5, 5, 0.3);
+}
+
+.print-stroke-distressed {
+  stroke-dasharray: 80 2 120 4;
+}
+
+/* Editorial Film Grain Overlays */
+.editorial-grain {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
+  background-size: 18px 18px;
+}
+
+.editorial-grain-paper {
+  background-image: 
+    radial-gradient(rgba(5, 5, 5, 0.06) 1px, transparent 0),
+    radial-gradient(rgba(5, 5, 5, 0.03) 1.5px, transparent 0);
+  background-size: 12px 12px, 24px 24px;
+}
+
+/* Manga Border Hairlines */
+.border-ink {
+  border-color: var(--color-black);
+}
+
+.border-ink-heavy {
+  border: 2px solid var(--color-black);
+}
+
+.border-paper-hairline {
+  border-color: rgba(237, 233, 223, 0.2);
+}
+
+.border-red-hairline {
+  border-color: rgba(181, 0, 22, 0.4);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-red);
+  color: var(--color-white);
+}
+
+::-moz-selection {
+  background-color: var(--color-red);
+  color: var(--color-white);
+}
+
