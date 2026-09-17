@@ -36,7 +36,7 @@ export function IntroSection() {
           className="lg:col-span-3 flex flex-row lg:flex-col items-start gap-8 pl-1 will-change-transform"
         >
           {/* Vertical Japanese line */}
-          <div className="writing-vertical-rl font-serif text-xl md:text-2xl tracking-[0.35em] text-[#EDE9DF]/95 font-light leading-loose border-r border-[#EDE9DF]/15 pr-5">
+          <div className="writing-vertical-rl font-japanese text-xl md:text-2xl tracking-[0.35em] text-[#EDE9DF]/95 font-light leading-loose border-r border-[#EDE9DF]/15 pr-5">
             見えるものが、すべてではない。
           </div>
 
@@ -66,7 +66,7 @@ export function IntroSection() {
             data-intro-subtitles
             className="mt-8 flex flex-col items-center lg:items-start gap-2.5 will-change-transform"
           >
-            <p className="font-serif text-lg md:text-2xl tracking-[0.38em] text-[#EDE9DF]/90 font-medium">
+            <p className="font-japanese text-lg md:text-2xl tracking-[0.38em] text-[#EDE9DF]/90 font-medium">
               夜に、何かが目を覚ます。
             </p>
             <p className="font-mono text-xs md:text-sm tracking-[0.3em] text-[#EDE9DF]/60 uppercase">

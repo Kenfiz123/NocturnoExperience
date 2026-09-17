@@ -38,7 +38,7 @@ export function AwakeningSection() {
         {/* Left Column (3 cols): Vertical Japanese Poem & Editorial Proverb */}
         <div data-awakening-copy className="lg:col-span-3 flex flex-row lg:flex-col items-start gap-8 z-20 pl-1 will-change-transform">
           {/* Vertical Japanese line */}
-          <div className="writing-vertical-rl font-serif text-2xl md:text-3xl tracking-[0.45em] text-[#F6F3EA] font-normal leading-loose border-r border-[#F6F3EA]/25 pr-5">
+          <div className="writing-vertical-rl font-japanese text-2xl md:text-3xl tracking-[0.45em] text-[#F6F3EA] font-normal leading-loose border-r border-[#F6F3EA]/25 pr-5">
             そして、目覚める。
           </div>
 

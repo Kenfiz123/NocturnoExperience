@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
+import { useLenis } from "@/hooks/useLenis";
 
 export function TopNav() {
+  const { scrollTo } = useLenis();
+
   const scrollToSection = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
+    scrollTo(`#${id}`, { duration: 1.1 });
   };
 
   return (
@@ -18,7 +18,11 @@ export function TopNav() {
       {/* Brand Titlemark (Left) */}
       <a
         href="#intro"
-        className="font-serif tracking-[0.22em] sm:tracking-[0.28em] text-xs sm:text-sm md:text-base font-semibold uppercase hover:text-[#B50016] transition-colors py-2"
+        onClick={(e) => {
+          e.preventDefault();
+          scrollToSection("intro");
+        }}
+        className="font-serif tracking-[0.22em] sm:tracking-[0.28em] text-xs sm:text-sm md:text-base font-semibold uppercase hover:text-[#B50016] transition-colors py-2 cursor-pointer"
         aria-label="NOCTURNO Home"
       >
         NOCTURNO
@@ -66,7 +70,7 @@ export function TopNav() {
 
         <div className="hidden sm:block h-3 w-[1px] bg-[#EDE9DF]/40" />
 
-        <span className="hidden sm:inline-block text-[10px] md:text-[11px] tracking-[0.2em] text-[#EDE9DF]/80 select-none">
+        <span className="hidden sm:inline-block font-japanese text-[10px] md:text-[11px] tracking-[0.2em] text-[#EDE9DF]/80 select-none">
           JP / EN
         </span>
       </nav>

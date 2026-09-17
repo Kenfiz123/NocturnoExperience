@@ -2,79 +2,116 @@ import { gsap } from "@/lib/gsap";
 
 export function initVoidMotion(isMobile: boolean) {
   const voidScene = document.querySelector<HTMLElement>('[data-scene="void"]');
-  if (!voidScene) return;
+  const voidStage = voidScene?.querySelector<HTMLElement>("[data-void-stage]");
+  if (!voidScene || !voidStage) return;
 
   const redDisc = voidScene.querySelector<HTMLElement>("[data-red-disc]");
   const silhouette = voidScene.querySelector<HTMLElement>("[data-silhouette]");
-  const verticalWarning = voidScene.querySelector<HTMLElement>(".writing-vertical-rl");
-  const voidMetadata = voidScene.querySelectorAll<HTMLElement>(".font-mono");
+  const voidCopy = voidScene.querySelector<HTMLElement>("[data-void-copy]");
 
-  // Controlled Pin Sequence for THE VOID (100–140vh scroll duration)
-  // Pinning the scene composition while the camera slowly pushes in on the blood moon
-  const pinDuration = isMobile ? "+=80%" : "+=130%";
-
-  const voidTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: voidScene,
-      start: "top top",
-      end: pinDuration,
-      pin: true,
-      scrub: 1.2,
-      anticipatePin: 1,
-      invalidateOnRefresh: true,
-    },
-  });
-
-  // Red Blood Moon Camera Push: Grows from contained disc to commanding presence (1.0 -> 1.38x)
-  if (redDisc) {
-    voidTl.to(
-      redDisc,
-      {
-        scale: isMobile ? 1.2 : 1.38,
-        y: isMobile ? -15 : -35,
-        ease: "none",
-        transformOrigin: "center center",
+  if (!isMobile) {
+    // Desktop: Pin visual stage container for 130% scroll distance (leaving nav unpinned)
+    const voidTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: voidScene,
+        start: "top top",
+        end: "+=130%",
+        pin: voidStage,
+        scrub: 1,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
       },
-      0
-    );
-  }
+    });
 
-  // Solitary Silhouette: Moves at a differential rate to enhance existential scale contrast
-  if (silhouette) {
-    voidTl.to(
-      silhouette,
-      {
-        y: isMobile ? 8 : 16,
-        scale: 0.95,
-        ease: "none",
-        transformOrigin: "center bottom",
-      },
-      0
-    );
-  }
+    // Red Moon Ritual Disc: Clearly visible camera push expanding from 1.0 to 1.45x
+    if (redDisc) {
+      voidTl.to(
+        redDisc,
+        {
+          scale: 1.45,
+          yPercent: -6,
+          ease: "none",
+          transformOrigin: "center center",
+        },
+        0
+      );
+    }
 
-  // Void Typography: Recedes gracefully as the red celestial body dominates
-  if (verticalWarning) {
-    voidTl.to(
-      verticalWarning,
-      {
-        opacity: 0.35,
-        x: isMobile ? -10 : -25,
-        ease: "none",
-      },
-      0
-    );
-  }
+    // Tiny Human Silhouette: Moves at differential depth, maintaining existential scale
+    if (silhouette) {
+      voidTl.to(
+        silhouette,
+        {
+          yPercent: 12,
+          scale: 0.92,
+          ease: "none",
+          transformOrigin: "center bottom",
+        },
+        0
+      );
+    }
 
-  if (voidMetadata.length > 0) {
-    voidTl.to(
-      voidMetadata,
-      {
-        opacity: 0.4,
-        y: -15,
-        ease: "none",
+    // Void Typography: Recedes gracefully as red disc commands full viewport
+    if (voidCopy) {
+      voidTl.to(
+        voidCopy,
+        {
+          opacity: 0.4,
+          xPercent: -8,
+          ease: "none",
+        },
+        0
+      );
+    }
+  } else {
+    // Mobile: Natural scrolling without heavy pinning to prevent touch entrapment
+    const mobileVoidTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: voidScene,
+        start: "top 60%",
+        end: "bottom top",
+        scrub: 1,
+        invalidateOnRefresh: true,
       },
-      0
-    );
+    });
+
+    if (redDisc) {
+      mobileVoidTl.to(
+        redDisc,
+        {
+          scale: 1.2,
+          yPercent: -8,
+          ease: "none",
+          transformOrigin: "center center",
+        },
+        0
+      );
+    }
+
+    if (silhouette) {
+      mobileVoidTl.to(
+        silhouette,
+        {
+          yPercent: 6,
+          scale: 0.96,
+          ease: "none",
+        },
+        0
+      );
+    }
+
+    if (voidCopy) {
+      mobileVoidTl.to(
+        voidCopy,
+        {
+          opacity: 0.5,
+          xPercent: -4,
+          ease: "none",
+        },
+        0
+      );
+    }
   }
 }
+
+export default initVoidMotion;

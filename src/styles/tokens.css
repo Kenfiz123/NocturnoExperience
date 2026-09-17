@@ -48,6 +48,11 @@
   text-orientation: upright;
 }
 
+/* Authentic Japanese Typography Utility */
+.font-japanese {
+  font-family: var(--font-japanese), var(--font-display), serif;
+}
+
 /* =========================================================================
    TACTILE MANGA PRINT & HALFTONE UTILITIES
    ========================================================================= */

@@ -5,30 +5,29 @@ export function initDescentMotion(isMobile: boolean) {
   if (!descentScene) return;
 
   const eyePanel = descentScene.querySelector<HTMLElement>('[data-panel="P.01"]');
+  const eyePanelInner = eyePanel?.querySelector<HTMLElement>("[data-panel-inner]") || eyePanel;
   const alleyPanel = descentScene.querySelector<HTMLElement>('[data-panel="P.02"]');
   const pagodaPanel = descentScene.querySelector<HTMLElement>('[data-panel="P.03"]');
-  const dialogueGutter = descentScene.querySelector<HTMLElement>(".writing-vertical-rl");
-  const narrativeBox = descentScene.querySelector<HTMLElement>(".paper-texture-aged p");
+  const dialogueGutter = descentScene.querySelector<HTMLElement>("[data-dialogue-gutter]");
+  const mangaComposition = descentScene.querySelector<HTMLElement>("[data-manga-composition]");
 
-  // Main Descent Manga Camera Timeline
   const descentTl = gsap.timeline({
     scrollTrigger: {
       trigger: descentScene,
-      start: "top 80%",
+      start: "top 75%",
       end: "bottom top",
       scrub: 1.2,
       invalidateOnRefresh: true,
     },
   });
 
-  // Main Eye Panel: Slow, steady camera push into the piercing manga gaze
-  if (eyePanel) {
-    const eyeInner = eyePanel.querySelector<HTMLElement>("[data-panel-inner]") || eyePanel;
+  // Main Manga Eye Panel: Piercing gaze camera push
+  if (eyePanelInner) {
     descentTl.to(
-      eyeInner,
+      eyePanelInner,
       {
-        scale: isMobile ? 1.03 : 1.08,
-        y: isMobile ? -10 : -20,
+        scale: isMobile ? 1.04 : 1.09,
+        yPercent: isMobile ? -5 : -8,
         ease: "none",
         transformOrigin: "center center",
       },
@@ -36,12 +35,12 @@ export function initDescentMotion(isMobile: boolean) {
     );
   }
 
-  // Lower-Left Alleyway Panel: Slightly upward pull (pulling deeper into the Edo street)
+  // Lower-Left Alleyway Panel: Pulls upward into shadows
   if (alleyPanel) {
     descentTl.to(
       alleyPanel,
       {
-        y: isMobile ? -15 : -40,
+        yPercent: isMobile ? -6 : -12,
         ease: "none",
       },
       0
@@ -53,46 +52,37 @@ export function initDescentMotion(isMobile: boolean) {
     descentTl.to(
       pagodaPanel,
       {
-        y: isMobile ? -8 : -20,
+        yPercent: isMobile ? -7 : -15,
         ease: "none",
       },
       0
     );
   }
 
-  // Dialogue Gutter: Anchored to page with subtle vertical stability
+  // Center Dialogue Gutter: Anchored to page with subtle vertical stability
   if (dialogueGutter) {
     descentTl.to(
       dialogueGutter,
       {
-        y: isMobile ? -4 : -8,
+        yPercent: isMobile ? -2 : -4,
         ease: "none",
       },
       0
     );
   }
 
-  // Narrative Copy: Very slight drift
-  if (narrativeBox) {
+  // Overall Manga Composition: Subtle camera pull
+  if (mangaComposition) {
     descentTl.to(
-      narrativeBox,
+      mangaComposition,
       {
-        y: isMobile ? -5 : -12,
+        scale: isMobile ? 1.01 : 1.02,
         ease: "none",
+        transformOrigin: "center center",
       },
       0
     );
   }
-
-  // Transition 02 -> 03: Paper spread lifts away as darkness rises
-  gsap.to(descentScene, {
-    scrollTrigger: {
-      trigger: descentScene,
-      start: "bottom 85%",
-      end: "bottom top",
-      scrub: 1,
-    },
-    y: isMobile ? -25 : -50,
-    ease: "none",
-  });
 }
+
+export default initDescentMotion;

@@ -38,7 +38,7 @@ export function VoidSection() {
       >
         {/* Left Column (3 cols): Vertical Japanese Warning & Philosophy */}
         <div data-void-copy className="flex flex-row lg:flex-col items-start gap-8 lg:w-1/4 z-20 will-change-transform">
-          <div className="writing-vertical-rl font-serif text-2xl md:text-3xl tracking-[0.4em] text-[#EDE9DF]/95 font-light leading-loose border-r border-[#EDE9DF]/15 pr-5">
+          <div className="writing-vertical-rl font-japanese text-2xl md:text-3xl tracking-[0.4em] text-[#EDE9DF]/95 font-light leading-loose border-r border-[#EDE9DF]/15 pr-5">
             ここから、戻れない。
           </div>
 

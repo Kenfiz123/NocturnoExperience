@@ -25,7 +25,7 @@ export function DescentSection() {
             <span className="font-mono text-[9px] text-[#050505]/50 tracking-widest">
               PROOF SHEET // SPREAD 02
             </span>
-            <span className="font-serif text-sm font-semibold tracking-wider text-[#050505]">
+            <span className="font-japanese text-sm font-semibold tracking-wider text-[#050505]">
               深淵への下降
             </span>
           </div>
@@ -49,7 +49,10 @@ export function DescentSection() {
       {/* =========================================================================
           ASYMMETRIC MANGA STORY PAGE COMPOSITION
           ========================================================================= */}
-      <div className="relative z-[var(--z-artwork,10)] my-6 md:my-10 max-w-6xl mx-auto w-full flex flex-col gap-8">
+      <div
+        data-manga-composition
+        className="relative z-[var(--z-artwork,10)] my-6 md:my-10 max-w-6xl mx-auto w-full flex flex-col gap-8"
+      >
         {/* TOP ROW: ASYMMETRICAL 75% WIDTH HORROR EYE PANEL + EDITORIAL GUTTER */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           {/* Main 75% Width Large Eyes Panel */}
@@ -103,18 +106,21 @@ export function DescentSection() {
           </div>
 
           {/* Center (2 cols): Very Narrow Vertical Japanese Typography Strip (Dialogue Gutter) */}
-          <div className="md:col-span-2 flex flex-col items-center justify-between bg-[#EDE9DF] border border-[#050505] p-4 py-6 shadow-sm min-h-[220px]">
+          <div
+            data-dialogue-gutter
+            className="md:col-span-2 flex flex-col items-center justify-between bg-[#EDE9DF] border border-[#050505] p-4 py-6 shadow-sm min-h-[220px]"
+          >
             {/* Top Registration Cross */}
             <CropMark size={12} className="text-[#050505]" />
 
             {/* Vertical Japanese Dialogue Gutter */}
             <div className="my-auto py-4 flex flex-col items-center">
               {/* Desktop/Tablet: Vertical Writing */}
-              <div className="hidden sm:block writing-vertical-rl font-serif text-2xl md:text-3xl tracking-[0.4em] text-[#050505] font-semibold leading-relaxed border-r border-[#050505]/30 pr-3">
+              <div className="hidden sm:block writing-vertical-rl font-japanese text-2xl md:text-3xl tracking-[0.4em] text-[#050505] font-semibold leading-relaxed border-r border-[#050505]/30 pr-3">
                 落ちていく
               </div>
               {/* Mobile: Horizontal Writing */}
-              <div className="sm:hidden font-serif text-xl tracking-[0.3em] text-[#050505] font-semibold">
+              <div className="sm:hidden font-japanese text-xl tracking-[0.3em] text-[#050505] font-semibold">
                 落ちていく
               </div>
 

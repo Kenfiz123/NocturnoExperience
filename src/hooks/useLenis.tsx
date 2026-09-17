@@ -1,10 +1,25 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import React, { createContext, useContext, useEffect, useRef, useCallback, ReactNode } from "react";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 
-export function useLenis() {
+interface LenisScrollOptions {
+  duration?: number;
+  offset?: number;
+}
+
+interface LenisContextValue {
+  getLenis: () => Lenis | null;
+  scrollTo: (target: string | HTMLElement, options?: LenisScrollOptions) => void;
+}
+
+const LenisContext = createContext<LenisContextValue>({
+  getLenis: () => null,
+  scrollTo: () => {},
+});
+
+export function LenisProvider({ children }: { children: ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
@@ -13,7 +28,7 @@ export function useLenis() {
     // Check prefers-reduced-motion
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Initialize Lenis with natural, heavy, cinematic feel
+    // Initialize Lenis smooth scroll engine
     const lenis = new Lenis({
       duration: prefersReducedMotion ? 0.1 : 1.25,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -49,7 +64,31 @@ export function useLenis() {
     };
   }, []);
 
-  return lenisRef;
+  const getLenis = useCallback(() => lenisRef.current, []);
+
+  const scrollTo = useCallback((target: string | HTMLElement, options?: LenisScrollOptions) => {
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(target, {
+        duration: options?.duration ?? 1.1,
+        offset: options?.offset ?? 0,
+      });
+    } else {
+      const el = typeof target === "string" ? document.querySelector(target) : target;
+      if (el) {
+        el.scrollIntoView();
+      }
+    }
+  }, []);
+
+  return (
+    <LenisContext.Provider value={{ getLenis, scrollTo }}>
+      {children}
+    </LenisContext.Provider>
+  );
+}
+
+export function useLenis() {
+  return useContext(LenisContext);
 }
 
 export default useLenis;

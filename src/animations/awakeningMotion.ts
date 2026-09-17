@@ -4,9 +4,9 @@ export function initAwakeningMotion(isMobile: boolean) {
   const awakeningScene = document.querySelector<HTMLElement>('[data-scene="awakening"]');
   if (!awakeningScene) return;
 
-  const displayTitle = awakeningScene.querySelector<HTMLElement>("[data-display-title]");
-  const silhouetteSvg = awakeningScene.querySelector<HTMLElement>("svg");
-  const verticalText = awakeningScene.querySelector<HTMLElement>(".writing-vertical-rl");
+  const awakeningTitle = awakeningScene.querySelector<HTMLElement>("[data-display-title]");
+  const awakeningSilhouette = awakeningScene.querySelector<HTMLElement>("[data-awakening-silhouette]");
+  const awakeningCopy = awakeningScene.querySelector<HTMLElement>("[data-awakening-copy]");
 
   const awakeningTl = gsap.timeline({
     scrollTrigger: {
@@ -19,12 +19,12 @@ export function initAwakeningMotion(isMobile: boolean) {
   });
 
   // Display Title: Slow vertical drift and subtle scale
-  if (displayTitle) {
+  if (awakeningTitle) {
     awakeningTl.to(
-      displayTitle,
+      awakeningTitle,
       {
-        y: isMobile ? -15 : -35,
-        scale: isMobile ? 1.015 : 1.035,
+        yPercent: isMobile ? -6 : -12,
+        scale: isMobile ? 1.015 : 1.03,
         ease: "none",
         transformOrigin: "left center",
       },
@@ -33,27 +33,29 @@ export function initAwakeningMotion(isMobile: boolean) {
   }
 
   // Woman Profile Silhouette: Subtle forward parallax
-  if (silhouetteSvg) {
+  if (awakeningSilhouette) {
     awakeningTl.to(
-      silhouetteSvg,
+      awakeningSilhouette,
       {
-        y: isMobile ? -10 : -22,
-        scale: isMobile ? 1.01 : 1.025,
+        yPercent: isMobile ? -4 : -8,
+        scale: isMobile ? 1.01 : 1.02,
         ease: "none",
       },
       0
     );
   }
 
-  // Vertical Japanese Poetry: Gentle anchored motion
-  if (verticalText) {
+  // Vertical Narrative Copy & Proverb: Gentle anchored motion
+  if (awakeningCopy) {
     awakeningTl.to(
-      verticalText,
+      awakeningCopy,
       {
-        y: isMobile ? -6 : -14,
+        yPercent: isMobile ? -2 : -5,
         ease: "none",
       },
       0
     );
   }
 }
+
+export default initAwakeningMotion;

@@ -6,81 +6,56 @@ import { initIntroMotion } from "./introMotion";
 import { initDescentMotion } from "./descentMotion";
 import { initVoidMotion } from "./voidMotion";
 import { initAwakeningMotion } from "./awakeningMotion";
+import { initIntroToDescent } from "./transitions/introToDescent";
+import { initDescentToVoid } from "./transitions/descentToVoid";
+import { initNavigationMotion } from "./navigationMotion";
 
 export function useSceneMotion() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    console.log("[NOCTURNO] useSceneMotion MOUNTED!", {
-      prefersReducedMotion,
-      windowWidth: window.innerWidth,
-      introEl: !!document.querySelector('[data-scene="intro"]'),
-      titleEl: !!document.querySelector('[data-display-title]'),
-    });
+    // Active Navigation Scene Tracker (functional for all users, including reduced-motion)
+    const navTriggers = initNavigationMotion();
 
+    // Check accessibility reduced-motion preference
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // If reduced-motion is preferred, bypass cinematic scrub timelines and pins
     if (prefersReducedMotion) {
-      console.log("[NOCTURNO] prefers-reduced-motion is TRUE, returning early!");
-      return;
+      return () => {
+        navTriggers.forEach((t) => t.kill());
+      };
     }
 
     const mm = gsap.matchMedia();
 
-    // Desktop & Tablet Landscape Setup (>= 769px)
+    // =========================================================================
+    // DESKTOP MOTION SETUP (>= 769px): Full cinematic camera movement & void pin
+    // =========================================================================
     mm.add("(min-width: 769px)", () => {
-      console.log("[NOCTURNO] mm.add min-width: 769px executing!");
       initIntroMotion(false);
+      initIntroToDescent(false);
       initDescentMotion(false);
+      initDescentToVoid(false);
       initVoidMotion(false);
       initAwakeningMotion(false);
-      
-      const all = ScrollTrigger.getAll();
-      console.log("[NOCTURNO] Triggers created:", all.length);
-      all.forEach((st, i) => {
-        console.log(`[NOCTURNO] Trigger ${i}:`, {
-          trigger: st.trigger,
-          start: st.start,
-          end: st.end,
-          progress: st.progress,
-        });
-      });
     });
 
-    // Mobile & Small Tablet Setup (<= 768px)
+    // =========================================================================
+    // MOBILE MOTION SETUP (<= 768px): Restrained movement without pinning
+    // =========================================================================
     mm.add("(max-width: 768px)", () => {
-      console.log("[NOCTURNO] mm.add max-width: 768px executing!");
       initIntroMotion(true);
+      initIntroToDescent(true);
       initDescentMotion(true);
+      initDescentToVoid(true);
       initVoidMotion(true);
       initAwakeningMotion(true);
-      console.log("[NOCTURNO] Mobile Triggers created:", ScrollTrigger.getAll().length);
     });
 
-    // Global Active Scene Indicator in TopNav (pure DOM updates, zero React re-renders)
-    const sceneIds = ["intro", "descent", "void", "awakening"];
-    const navTriggers: ScrollTrigger[] = [];
-
-    sceneIds.forEach((id) => {
-      const sceneEl = document.querySelector(`[data-scene="${id}"]`);
-      if (!sceneEl) return;
-
-      const trigger = ScrollTrigger.create({
-        trigger: sceneEl,
-        start: "top 55%",
-        end: "bottom 45%",
-        onToggle: (self) => {
-          if (self.isActive) {
-            document.querySelectorAll<HTMLElement>("[data-nav-scene]").forEach((btn) => {
-              if (btn.getAttribute("data-nav-scene") === id) {
-                btn.classList.add("text-[#B50016]", "font-bold");
-              } else {
-                btn.classList.remove("text-[#B50016]", "font-bold");
-              }
-            });
-          }
-        },
-      });
-      navTriggers.push(trigger);
+    // Controlled refresh once components mount and layout computes
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
     });
 
     return () => {
