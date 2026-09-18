@@ -12,7 +12,7 @@ export function TopNav() {
 
   return (
     <header
-      className="fixed top-0 left-0 w-full h-[var(--chrome-height,4.5rem)] z-[var(--z-chrome,50)] flex items-center justify-between px-5 sm:px-8 md:px-12 pointer-events-auto mix-blend-difference text-[#EDE9DF] select-none"
+      className="fixed top-0 left-0 w-full h-[var(--chrome-height,4.5rem)] z-[var(--z-chrome,50)] flex items-center justify-between px-5 sm:px-8 md:px-12 pointer-events-auto backdrop-blur-md bg-[#050505]/60 border-b border-[#EDE9DF]/5 text-[#EDE9DF] select-none"
       role="banner"
     >
       {/* Brand Titlemark (Left) */}

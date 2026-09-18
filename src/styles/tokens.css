@@ -135,3 +135,20 @@
   color: var(--color-white);
 }
 
+/* Active Navigation Scene Indicator */
+[data-nav-scene][data-active] {
+  color: var(--color-red) !important;
+  font-weight: 700;
+  position: relative;
+}
+
+[data-nav-scene][data-active]::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  right: 25%;
+  height: 1px;
+  background-color: var(--color-red);
+}
+

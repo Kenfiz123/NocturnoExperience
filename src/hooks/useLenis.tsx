@@ -67,15 +67,17 @@ export function LenisProvider({ children }: { children: ReactNode }) {
   const getLenis = useCallback(() => lenisRef.current, []);
 
   const scrollTo = useCallback((target: string | HTMLElement, options?: LenisScrollOptions) => {
+    const isReduced = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (lenisRef.current) {
       lenisRef.current.scrollTo(target, {
-        duration: options?.duration ?? 1.1,
+        duration: isReduced ? 0 : (options?.duration ?? 1.1),
         offset: options?.offset ?? 0,
+        immediate: isReduced,
       });
     } else {
       const el = typeof target === "string" ? document.querySelector(target) : target;
       if (el) {
-        el.scrollIntoView();
+        el.scrollIntoView({ behavior: isReduced ? "auto" : "smooth" });
       }
     }
   }, []);

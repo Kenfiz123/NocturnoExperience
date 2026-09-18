@@ -7,7 +7,7 @@ export function VoidSection() {
     <section
       id="void"
       data-scene="void"
-      className="relative min-h-screen w-full bg-[#050505] text-[#EDE9DF] flex flex-col justify-between pt-[var(--scene-safe-top,7.5rem)] pb-8 px-6 md:px-14 overflow-hidden select-none border-b border-[#EDE9DF]/10"
+      className="relative z-10 min-h-screen w-full bg-[#050505] text-[#EDE9DF] flex flex-col justify-between pt-[var(--scene-safe-top,7.5rem)] pb-8 px-6 md:px-14 overflow-hidden select-none border-b border-[#EDE9DF]/10"
     >
       {/* Background Editorial Noise & Halftone Screentone */}
       <div className="absolute inset-0 pointer-events-none opacity-20 editorial-grain z-[var(--z-base,1)]" />
@@ -17,7 +17,7 @@ export function VoidSection() {
       <div className="absolute top-0 bottom-0 right-8 md:right-14 w-[1px] bg-[#EDE9DF]/5 pointer-events-none z-[var(--z-base,1)]" />
 
       {/* Top Header Region (Safely positioned below global chrome) */}
-      <div className="relative z-[var(--z-scene-meta,30)] flex items-start justify-between mb-4 md:mb-6">
+      <div data-void-meta className="relative z-[var(--z-scene-meta,30)] flex items-start justify-between mb-4 md:mb-6 will-change-transform">
         <SectionLabel number="03" title="THE VOID" theme="dark" />
 
         <div className="flex items-center gap-4 text-[#EDE9DF]/50 font-mono text-[9px] select-none pt-1">
@@ -36,6 +36,7 @@ export function VoidSection() {
         data-void-stage
         className="relative z-10 flex-1 flex flex-col lg:flex-row items-center justify-between my-6 md:my-10 gap-8 will-change-transform"
       >
+
         {/* Left Column (3 cols): Vertical Japanese Warning & Philosophy */}
         <div data-void-copy className="flex flex-row lg:flex-col items-start gap-8 lg:w-1/4 z-20 will-change-transform">
           <div className="writing-vertical-rl font-japanese text-2xl md:text-3xl tracking-[0.4em] text-[#EDE9DF]/95 font-light leading-loose border-r border-[#EDE9DF]/15 pr-5">
@@ -62,7 +63,7 @@ export function VoidSection() {
           <div
             id="void-portal-container"
             data-red-disc
-            className="relative w-[340px] h-[340px] sm:w-[440px] sm:h-[440px] md:w-[540px] md:h-[540px] lg:w-[620px] lg:h-[620px] flex items-center justify-center"
+            className="relative w-[340px] h-[340px] sm:w-[440px] sm:h-[440px] md:w-[540px] md:h-[540px] lg:w-[620px] lg:h-[620px] flex items-center justify-center will-change-transform"
           >
             {/* SVG Artwork: Eroded Textured Blood Moon with Ink Breakup */}
             <svg
@@ -84,12 +85,59 @@ export function VoidSection() {
                 </filter>
               </defs>
 
-              {/* Dominant Deep-Red Ritual Disc with Ink Edge Erosion */}
+              {/* 1. Subtle Outer Ambient Red Halo */}
+              <circle
+                cx="300"
+                cy="280"
+                r="248"
+                fill="#B50016"
+                opacity="0.14"
+                filter="url(#voidErosion)"
+              />
+
+              {/* 2. Occult Ritual Alignment Ring with Manga Registration Ticks */}
+              <circle
+                cx="300"
+                cy="280"
+                r="238"
+                stroke="#B50016"
+                strokeWidth="0.75"
+                strokeDasharray="18 4 6 2 48 6 12 3"
+                fill="none"
+                opacity="0.38"
+              />
+
+              {/* 3. Outer Inked Distress Ring (Organic ink bleed fringe) */}
+              <circle
+                cx="300"
+                cy="280"
+                r="230"
+                stroke="#68000C"
+                strokeWidth="3"
+                strokeDasharray="120 4 80 6 160 3 40 5"
+                fill="none"
+                opacity="0.55"
+                filter="url(#voidErosion)"
+              />
+
+              {/* 4. Dominant Deep-Red Ritual Disc with Ink Edge Erosion */}
               <circle
                 cx="300"
                 cy="280"
                 r="225"
                 fill="url(#voidBloodGrad)"
+                filter="url(#voidErosion)"
+              />
+
+              {/* 5. Inner Dark Blood Rim (Depth layer framing the aperture) */}
+              <circle
+                cx="300"
+                cy="280"
+                r="223"
+                stroke="#140003"
+                strokeWidth="7"
+                fill="none"
+                opacity="0.82"
                 filter="url(#voidErosion)"
               />
 
@@ -105,13 +153,22 @@ export function VoidSection() {
               {/* Dripping Tendril 5 */}
               <path d="M380,465 Q385,510 382,530" stroke="#68000C" strokeWidth="2.5" fill="none" />
 
-              {/* Outer Edge Breakup Particles & Inked Splatters */}
+              {/* Outer Edge Breakup Particles, Inked Splatters & Bleed Flecks */}
               <circle cx="120" cy="190" r="3.5" fill="#B50016" />
               <circle cx="112" cy="205" r="2" fill="#B50016" />
+              <circle cx="98" cy="235" r="2.8" fill="#8E0011" />
+              <circle cx="106" cy="255" r="1.8" fill="#68000C" />
               <circle cx="485" cy="180" r="4" fill="#B50016" />
               <circle cx="498" cy="195" r="2.5" fill="#B50016" />
+              <circle cx="512" cy="225" r="3" fill="#8E0011" />
+              <circle cx="505" cy="245" r="1.6" fill="#68000C" />
               <circle cx="150" cy="120" r="3" fill="#B50016" />
+              <circle cx="170" cy="100" r="2.2" fill="#8E0011" />
               <circle cx="450" cy="115" r="3.5" fill="#B50016" />
+              <circle cx="430" cy="95" r="2" fill="#8E0011" />
+              <circle cx="210" cy="75" r="2.5" fill="#B50016" />
+              <circle cx="390" cy="72" r="2.5" fill="#B50016" />
+              <circle cx="300" cy="62" r="3" fill="#8E0011" />
 
               {/* Internal Occult Ink Cracks & Lunar Craters */}
               <path d="M210,170 Q270,220 255,320 Q240,370 280,440" stroke="#120002" strokeWidth="4.5" fill="none" opacity="0.8" />
@@ -146,7 +203,7 @@ export function VoidSection() {
         </div>
 
         {/* Right Column (3 cols): Technical Editorial Codes */}
-        <div className="hidden lg:flex flex-col items-end gap-8 lg:w-1/4 z-20">
+        <div data-void-copy className="hidden lg:flex flex-col items-end gap-8 lg:w-1/4 z-20 will-change-transform">
           <div className="flex flex-col items-end gap-2 text-right">
             <span className="font-mono text-xs tracking-widest text-[#EDE9DF]/40">
               TOTAL ECLIPSE
@@ -164,7 +221,7 @@ export function VoidSection() {
       </div>
 
       {/* Bottom Editorial Marker */}
-      <div className="relative z-10 flex items-center justify-between pt-6 border-t border-[#EDE9DF]/10 font-mono text-xs text-[#EDE9DF]/50">
+      <div data-void-meta className="relative z-10 flex items-center justify-between pt-6 border-t border-[#EDE9DF]/10 font-mono text-xs text-[#EDE9DF]/50 will-change-transform">
         <div className="flex items-center gap-3">
           <span className="text-[#B50016] font-bold">03</span>
           <span className="text-[#EDE9DF]/70">THE UNBOUND VOID</span>

@@ -8,11 +8,17 @@ export function initAwakeningMotion(isMobile: boolean) {
   const awakeningSilhouette = awakeningScene.querySelector<HTMLElement>("[data-awakening-silhouette]");
   const awakeningCopy = awakeningScene.querySelector<HTMLElement>("[data-awakening-copy]");
 
+  // Establish clean starting state matching portal completion handoff
+  if (awakeningTitle) gsap.set(awakeningTitle, { yPercent: 0, scale: 1, opacity: 1 });
+  if (awakeningSilhouette) gsap.set(awakeningSilhouette, { yPercent: 0, scale: 1, opacity: 1 });
+  if (awakeningCopy) gsap.set(awakeningCopy, { yPercent: 0, opacity: 1 });
+
+  // Normal Awakening motion begins strictly AFTER the portal handoff completes (top top)
   const awakeningTl = gsap.timeline({
     scrollTrigger: {
       trigger: awakeningScene,
-      start: "top 80%",
-      end: "bottom bottom",
+      start: "top top",
+      end: "+=60%",
       scrub: 1.2,
       invalidateOnRefresh: true,
     },

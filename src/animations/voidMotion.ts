@@ -10,20 +10,18 @@ export function initVoidMotion(isMobile: boolean) {
   const voidCopy = voidScene.querySelector<HTMLElement>("[data-void-copy]");
 
   if (!isMobile) {
-    // Desktop: Pin visual stage container for 130% scroll distance (leaving nav unpinned)
+    // Desktop: Approach camera push as Scene 03 enters viewport (Pin ownership belongs to voidToAwakening)
     const voidTl = gsap.timeline({
       scrollTrigger: {
         trigger: voidScene,
-        start: "top top",
-        end: "+=130%",
-        pin: voidStage,
+        start: "top 80%",
+        end: "top top",
         scrub: 1,
-        anticipatePin: 1,
         invalidateOnRefresh: true,
       },
     });
 
-    // Red Moon Ritual Disc: Clearly visible camera push expanding from 1.0 to 1.45x
+    // Red Moon Ritual Disc: Camera approach expanding from 1.0 to 1.45x
     if (redDisc) {
       voidTl.to(
         redDisc,
@@ -37,7 +35,7 @@ export function initVoidMotion(isMobile: boolean) {
       );
     }
 
-    // Tiny Human Silhouette: Moves at differential depth, maintaining existential scale
+    // Tiny Human Silhouette: Differential depth
     if (silhouette) {
       voidTl.to(
         silhouette,
@@ -51,12 +49,12 @@ export function initVoidMotion(isMobile: boolean) {
       );
     }
 
-    // Void Typography: Recedes gracefully as red disc commands full viewport
+    // Void Typography: Recedes slightly as red disc approaches
     if (voidCopy) {
       voidTl.to(
         voidCopy,
         {
-          opacity: 0.4,
+          opacity: 0.65,
           xPercent: -8,
           ease: "none",
         },
@@ -64,7 +62,7 @@ export function initVoidMotion(isMobile: boolean) {
       );
     }
   } else {
-    // Mobile: Natural scrolling without heavy pinning to prevent touch entrapment
+    // Mobile: Natural scrolling without pinning
     const mobileVoidTl = gsap.timeline({
       scrollTrigger: {
         trigger: voidScene,
@@ -79,7 +77,7 @@ export function initVoidMotion(isMobile: boolean) {
       mobileVoidTl.to(
         redDisc,
         {
-          scale: 1.2,
+          scale: 1.25,
           yPercent: -8,
           ease: "none",
           transformOrigin: "center center",

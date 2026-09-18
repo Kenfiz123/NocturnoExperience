@@ -51,7 +51,7 @@ export function DescentSection() {
           ========================================================================= */}
       <div
         data-manga-composition
-        className="relative z-[var(--z-artwork,10)] my-6 md:my-10 max-w-6xl mx-auto w-full flex flex-col gap-8"
+        className="relative z-[var(--z-artwork,10)] my-6 md:my-10 max-w-6xl mx-auto w-full flex flex-col gap-8 will-change-transform"
       >
         {/* TOP ROW: ASYMMETRICAL 75% WIDTH HORROR EYE PANEL + EDITORIAL GUTTER */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
@@ -108,7 +108,7 @@ export function DescentSection() {
           {/* Center (2 cols): Very Narrow Vertical Japanese Typography Strip (Dialogue Gutter) */}
           <div
             data-dialogue-gutter
-            className="md:col-span-2 flex flex-col items-center justify-between bg-[#EDE9DF] border border-[#050505] p-4 py-6 shadow-sm min-h-[220px]"
+            className="md:col-span-2 flex flex-col items-center justify-between bg-[#EDE9DF] border border-[#050505] p-4 py-6 shadow-sm min-h-[220px] will-change-transform"
           >
             {/* Top Registration Cross */}
             <CropMark size={12} className="text-[#050505]" />

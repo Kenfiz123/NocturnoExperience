@@ -16,9 +16,9 @@ export function initNavigationMotion(): ScrollTrigger[] {
         if (self.isActive) {
           document.querySelectorAll<HTMLElement>("[data-nav-scene]").forEach((btn) => {
             if (btn.getAttribute("data-nav-scene") === id) {
-              btn.classList.add("text-[#B50016]", "font-bold");
+              btn.setAttribute("data-active", "true");
             } else {
-              btn.classList.remove("text-[#B50016]", "font-bold");
+              btn.removeAttribute("data-active");
             }
           });
         }

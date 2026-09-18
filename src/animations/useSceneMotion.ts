@@ -8,6 +8,7 @@ import { initVoidMotion } from "./voidMotion";
 import { initAwakeningMotion } from "./awakeningMotion";
 import { initIntroToDescent } from "./transitions/introToDescent";
 import { initDescentToVoid } from "./transitions/descentToVoid";
+import { initVoidToAwakening } from "./transitions/voidToAwakening";
 import { initNavigationMotion } from "./navigationMotion";
 
 export function useSceneMotion() {
@@ -38,6 +39,7 @@ export function useSceneMotion() {
       initDescentMotion(false);
       initDescentToVoid(false);
       initVoidMotion(false);
+      initVoidToAwakening(false);
       initAwakeningMotion(false);
     });
 
@@ -50,6 +52,7 @@ export function useSceneMotion() {
       initDescentMotion(true);
       initDescentToVoid(true);
       initVoidMotion(true);
+      initVoidToAwakening(true);
       initAwakeningMotion(true);
     });
 
